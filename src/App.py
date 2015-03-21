@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 from socketIO_client import SocketIO
 import json
+import serial
 
 isOnline = False
+ser = serial.Serial('/dev/ttyACM0', 9600)
 
 def Welcome_response(*args):
-    for argumento in args:
-        isOnline = True
+    global isOnline
+    isOnline = True
 
 def command_Hydra(*args):
-	print(args)
+
     for hydraData in args:
         if isOnline == True:
-        	print(hydraData)
-            #decoded = json.loads(hydraData)
-            #print(decoded['Command'])
+            decoded = json.loads(hydraData)
+            print(decoded['Values'][0])
+            ser.write('1')
 
 socketIO = SocketIO('localhost', 3000)
 socketIO.on('Welcome', Welcome_response)
