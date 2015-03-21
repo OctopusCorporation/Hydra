@@ -12,8 +12,7 @@ def command_Hydra(*args):
     for data in args:
         if isOnline == True:
             decoded = json.loads(data)
-            text = "Command: " + decoded['Command'] + ", Values: " + decoded['Values']
-            print(text)
+            print(decoded['Command'])
 
 socketIO = SocketIO('localhost', 3000)
 socketIO.on('Welcome', Welcome_response)
