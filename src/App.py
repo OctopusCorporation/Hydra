@@ -9,11 +9,11 @@ def Welcome_response(*args):
         isOnline = True
 
 def command_Hydra(*args):
-    for data in args:
+    for hydraData in args:
         if isOnline == True:
-        	print(data)
-            decoded = json.loads(data)
-            print(decoded['Command'])
+        	print(hydraData)
+            #decoded = json.loads(hydraData)
+            #print(decoded['Command'])
 
 socketIO = SocketIO('localhost', 3000)
 socketIO.on('Welcome', Welcome_response)
