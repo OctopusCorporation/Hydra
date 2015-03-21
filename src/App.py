@@ -6,6 +6,7 @@ import serial
 locations=['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2','/dev/ttyACM3']
 
 isOnline = False
+# Detect and select the Serial Port
 for device in locations:  
     try:
         ser = serial.Serial(device, 9600)  
