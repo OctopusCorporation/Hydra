@@ -11,6 +11,7 @@ def Welcome_response(*args):
 def command_Hydra(*args):
     for data in args:
         if isOnline == True:
+        	print(data)
             decoded = json.loads(data)
             print(decoded['Command'])
 
