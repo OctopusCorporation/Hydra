@@ -15,8 +15,11 @@ def command_Hydra(*args):
     for hydraData in args:
         if isOnline == True:
             decoded = json.loads(hydraData)
-            print(decoded['Values'][0])
-            ser.write('1')
+            hydraValues = json.loads(decoded['Values'][0])
+            if hydraValues['isOn'] == True
+                ser.write('1')
+            else
+                ser.write('0')
 
 socketIO = SocketIO('localhost', 3000)
 socketIO.on('Welcome', Welcome_response)
