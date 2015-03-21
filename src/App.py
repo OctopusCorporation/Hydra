@@ -9,6 +9,7 @@ def Welcome_response(*args):
         isOnline = True
 
 def command_Hydra(*args):
+	print(args)
     for hydraData in args:
         if isOnline == True:
         	print(hydraData)
