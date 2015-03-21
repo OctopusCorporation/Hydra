@@ -3,19 +3,25 @@ from socketIO_client import SocketIO
 import json
 import serial
 
+locations=['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2','/dev/ttyACM3']
+
 isOnline = False
-ser = serial.Serial('/dev/ttyACM0', 9600)
+for device in locations:  
+    try:
+        ser = serial.Serial(device, 9600)  
+    except:  
+        print "Failed to connect on ",device  
+
 
 def Welcome_response(*args):
     global isOnline
     isOnline = True
 
 def command_Hydra(*args):
-
     for hydraData in args:
         if isOnline == True:
             decoded = json.loads(hydraData)
-            hydraValues = json.loads(decoded['Values'][0])
+            hydraValues = json.loads(json.dumps(decoded['Values'][0]))
             if hydraValues['isOn'] == True:
                 ser.write('1')
             else:
