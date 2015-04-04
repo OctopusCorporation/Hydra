@@ -24,7 +24,7 @@ def command_Hydra(*args):
     for hydraData in args:
         if isOnline == True:
             decoded = json.loads(hydraData)
-            print decoded['Command'][0]
+            print decoded['Command']
             hydraValues = json.loads(json.dumps(decoded['Values'][0]))
             if hydraValues['isOn'] == True:
                 ser.write('1')
