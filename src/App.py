@@ -24,6 +24,7 @@ def command_Hydra(*args):
     for hydraData in args:
         if isOnline == True:
             decoded = json.loads(hydraData)
+            print hydraData
             hydraValues = json.loads(json.dumps(decoded['Values'][0]))
             if hydraValues['isOn'] == True:
                 ser.write('1')
@@ -34,10 +35,13 @@ def compile_Arduino(*args):
     for hydraData in args:
         dataDecoded = json.loads(hydraData)
         hydraValues = json.loads(json.dumps(decoded['Values'][0]))
+
+        # Create the Arduino Sketch template
         script = "./home/pi/OctopusGIT/Quimera/src/ArduinoCreatorFactory.sh -n %s -i %s" % (hydraValues['appName'], hydraValues['arduinoId'])
         print "ArduinoCreatorFactory.sh is being called..."
         subprocess.call(script, shell=True)
         print "ArduinoCreatorFactory.sh execution is finished"
+        # Change the template
 
 
 socketIO = SocketIO('localhost', 3000)
