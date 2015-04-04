@@ -24,24 +24,26 @@ def command_Hydra(*args):
     for hydraData in args:
         if isOnline == True:
             decoded = json.loads(hydraData)
-            print decoded['Command']
-            hydraValues = json.loads(json.dumps(decoded['Values'][0]))
-            if hydraValues['isOn'] == True:
-                ser.write('1')
+            print "Command received: " + decoded['Command']
+            if decoded['Command'] == 'command.compileArduino':
+                compile_Arduino(decoded['Values'][0])
             else:
-                ser.write('0')
+                hydraValues = json.loads(json.dumps(decoded['Values'][0]))
+                if hydraValues['isOn'] == True:
+                    ser.write('1')
+                else:
+                    ser.write('0')
 
-def compile_Arduino(*args):
-    for hydraData in args:
-        dataDecoded = json.loads(hydraData)
-        hydraValues = json.loads(json.dumps(decoded['Values'][0]))
+def compile_Arduino(args):
+    arduinoData = json.loads(json.dumps(args))
 
-        # Create the Arduino Sketch template
-        script = "./home/pi/OctopusGIT/Quimera/src/ArduinoCreatorFactory.sh -n %s -i %s" % (hydraValues['appName'], hydraValues['arduinoId'])
-        print "ArduinoCreatorFactory.sh is being called..."
-        subprocess.call(script, shell=True)
-        print "ArduinoCreatorFactory.sh execution is finished"
-        # Change the template
+    # Create the Arduino Sketch template
+    script = "./home/pi/OctopusGIT/Quimera/src/ArduinoCreatorFactory.sh -n %s -i %s" % (arduinoData['appName'], arduinoData['arduinoId'])
+    print "ArduinoCreatorFactory.sh is being called..."
+    subprocess.call(script, shell=True)
+    print "ArduinoCreatorFactory.sh execution is finished"
+    # Change the template
+    # // Do something
 
 
 socketIO = SocketIO('localhost', 3000)
