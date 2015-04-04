@@ -49,6 +49,5 @@ def compile_Arduino(args):
 socketIO = SocketIO('localhost', 3000)
 socketIO.on('Welcome', Welcome_response)
 socketIO.on('command.Hydra', command_Hydra)
-socketIO.on('command.compileArduino', command_Hydra)
 #socketIO.emit('aaa')
 socketIO.wait()
